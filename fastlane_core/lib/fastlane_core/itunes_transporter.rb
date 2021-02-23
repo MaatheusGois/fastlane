@@ -426,7 +426,6 @@ module FastlaneCore
       end
 
       @jwt = jwt
-
       @transporter_executor = use_shell_script ? ShellScriptTransporterExecutor.new : JavaTransporterExecutor.new
       @provider_short_name = provider_short_name
     end
@@ -456,7 +455,7 @@ module FastlaneCore
 
       return result if Helper.test?
 
-      itmsp_path = File.join(dir, "#{app_id}-#{aleatory_key}.itmsp")
+      itmsp_path = File.join(dir, "#{app_id}-#{@aleatory_key}.itmsp")
       successful = result && File.directory?(itmsp_path)
 
       if successful
@@ -475,7 +474,7 @@ module FastlaneCore
     # @raise [Deliver::TransporterTransferError] when something went wrong
     #   when transferring
     def upload(app_id, dir)
-      actual_dir = File.join(dir, "#{app_id}-#{aleatory_key}.itmsp")
+      actual_dir = File.join(dir, "#{app_id}-#{@aleatory_key}.itmsp")
 
       UI.message("Going to upload updated app to App Store Connect")
       UI.success("This might take a few minutes. Please don't interrupt the script.")

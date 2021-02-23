@@ -84,6 +84,7 @@ module CredentialsManager
         rand(16).to_s(16)
       end
     end
+
     def add_to_keychain
       if options
         Security::InternetPassword.add(server_name, user, password, options)
