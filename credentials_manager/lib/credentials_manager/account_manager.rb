@@ -20,9 +20,6 @@ module CredentialsManager
       @user = user
       @password = password
       @note = note
-      if !@aleatory_key
-        @aleatory_key = aleatory_key
-      end
     end
 
     # Is the default prefix "deliver"
@@ -79,12 +76,6 @@ module CredentialsManager
         return true
       end
       false
-    end
-
-    def aleatory_key
-      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".gsub("x") do
-        rand(16).to_s(16)
-      end
     end
 
     def add_to_keychain

@@ -425,19 +425,9 @@ module FastlaneCore
         @password = password || load_password_for_transporter
       end
 
-      if !@aleatory_key
-        @aleatory_key = aleatory_key
-      end
-
       @jwt = jwt
       @transporter_executor = use_shell_script ? ShellScriptTransporterExecutor.new : JavaTransporterExecutor.new
       @provider_short_name = provider_short_name
-    end
-
-    def aleatory_key
-      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".gsub("x") do
-        rand(16).to_s(16)
-      end
     end
 
     # Downloads the latest version of the app metadata package from iTC.
@@ -465,7 +455,7 @@ module FastlaneCore
 
       return result if Helper.test?
 
-      itmsp_path = File.join(dir, "#{app_id}-#{@aleatory_key}.itmsp")
+      itmsp_path = File.join(dir, "#{app_id}-#{ENV["CUSTOM_ITMSP"]}.itmsp")
       successful = result && File.directory?(itmsp_path)
 
       if successful
@@ -484,7 +474,7 @@ module FastlaneCore
     # @raise [Deliver::TransporterTransferError] when something went wrong
     #   when transferring
     def upload(app_id, dir)
-      actual_dir = File.join(dir, "#{app_id}-#{@aleatory_key}.itmsp")
+      actual_dir = File.join(dir, "#{app_id}-#{ENV["CUSTOM_ITMSP"]}.itmsp")
 
       UI.message("Going to upload updated app to App Store Connect")
       UI.success("This might take a few minutes. Please don't interrupt the script.")
