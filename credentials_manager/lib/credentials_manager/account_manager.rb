@@ -20,7 +20,9 @@ module CredentialsManager
       @user = user
       @password = password
       @note = note
-      @aleatory_key = aleatory_key
+      if !@aleatory_key
+        @aleatory_key = aleatory_key
+      end
     end
 
     # Is the default prefix "deliver"

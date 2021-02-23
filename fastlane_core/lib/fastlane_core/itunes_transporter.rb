@@ -425,7 +425,7 @@ module FastlaneCore
         @password = password || load_password_for_transporter
       end
 
-      if @aleatory_key.empty?
+      if !@aleatory_key
         @aleatory_key = aleatory_key
       end
 
