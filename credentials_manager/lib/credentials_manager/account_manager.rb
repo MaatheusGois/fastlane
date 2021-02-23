@@ -20,6 +20,7 @@ module CredentialsManager
       @user = user
       @password = password
       @note = note
+      @aleatory_key = aleatory_key
     end
 
     # Is the default prefix "deliver"
@@ -78,6 +79,11 @@ module CredentialsManager
       false
     end
 
+    def aleatory_key
+      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".gsub("x") do
+        rand(16).to_s(16)
+      end
+    end
     def add_to_keychain
       if options
         Security::InternetPassword.add(server_name, user, password, options)
