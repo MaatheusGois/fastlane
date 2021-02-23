@@ -425,9 +425,19 @@ module FastlaneCore
         @password = password || load_password_for_transporter
       end
 
+      if @aleatory_key.empty?
+        @aleatory_key = aleatory_key
+      end
+
       @jwt = jwt
       @transporter_executor = use_shell_script ? ShellScriptTransporterExecutor.new : JavaTransporterExecutor.new
       @provider_short_name = provider_short_name
+    end
+
+    def aleatory_key
+      "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".gsub("x") do
+        rand(16).to_s(16)
+      end
     end
 
     # Downloads the latest version of the app metadata package from iTC.
