@@ -4,9 +4,9 @@ require_relative 'module'
 
 module Match
   class Utils
-    def self.import(item_path, keychain, password: nil)
+    def self.import(item_path, keychain, password: nil, certificate_password: "")
       keychain_path = FastlaneCore::Helper.keychain_path(keychain)
-      FastlaneCore::KeychainImporter.import_file(item_path, keychain_path, keychain_password: password, output: FastlaneCore::Globals.verbose?)
+      FastlaneCore::KeychainImporter.import_file(item_path, keychain_path, keychain_password: password, certificate_password: certificate_password, output: FastlaneCore::Globals.verbose?)
     end
 
     # Fill in an environment variable, ready to be used in _xcodebuild_
