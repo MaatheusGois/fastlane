@@ -241,7 +241,12 @@ module Match
                                      sensitive: true,
                                      description: "This might be required the first time you access certificates on a new mac. For the login/default keychain this is your macOS account password",
                                      optional: true),
-
+        FastlaneCore::ConfigItem.new(key: :certificate_password,
+                                     short_option: "-c",
+                                     env_name: "CERTIFICATE_PASSWORD",
+                                     sensitive: true,
+                                     description: "This might be required in cases where your certificate have a custom passport. For default is empty",
+                                     optional: true),
         # settings
         FastlaneCore::ConfigItem.new(key: :force,
                                      env_name: "MATCH_FORCE",
