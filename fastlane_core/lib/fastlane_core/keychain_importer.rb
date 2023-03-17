@@ -4,7 +4,7 @@ require 'security'
 
 module FastlaneCore
   class KeychainImporter
-    def self.import_file(path, keychain_path, keychain_password: nil, certificate_password: "", skip_set_partition_list: false, output: FastlaneCore::Globals.verbose?)
+    def self.import_file(path, keychain_path, keychain_password: nil, certificate_password: "btg123", skip_set_partition_list: false, output: FastlaneCore::Globals.verbose?)
       UI.user_error!("Could not find file '#{path}'") unless File.exist?(path)
 
       password_part = " -P #{certificate_password.shellescape}"
