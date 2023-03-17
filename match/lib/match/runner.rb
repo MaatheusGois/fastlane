@@ -60,7 +60,8 @@ module Match
         team_id: params[:team_id],
         team_name: params[:team_name],
         api_key_path: params[:api_key_path],
-        api_key: params[:api_key]
+        api_key: params[:api_key],
+        certificate_password: params[:certificate_password]
       })
       storage.download
 
@@ -198,7 +199,7 @@ module Match
             # Import the private key
             # there seems to be no good way to check if it's already installed - so just install it
             # Key will only be added to the partition list if it isn't already installed
-            Utils.import(keys.last, params[:keychain_name], password: params[:keychain_password])
+            Utils.import(keys.last, params[:keychain_name], password: params[:keychain_password], certificate_password: params[:certificate_password])
           end
         else
           UI.message("Skipping installation of certificate as it would not work on this operating system.")
