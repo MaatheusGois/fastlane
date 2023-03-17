@@ -7,7 +7,7 @@ module FastlaneCore
     def self.import_file(path, keychain_path, keychain_password: nil, certificate_password: "", skip_set_partition_list: false, output: FastlaneCore::Globals.verbose?)
       UI.user_error!("Could not find file '#{path}'") unless File.exist?(path)
 
-      password_part = " -P #{certificate_password.shellescape}"
+      password_part = " -P #{certificate_password}"
       puts "--- test"
       puts certificate_password
       puts "--- test"
@@ -19,7 +19,7 @@ module FastlaneCore
       command << " -T /usr/bin/productsign"  # to not be asked for permission when using an installer cert for macOS
       command << " 1> /dev/null" unless output
 
-      sensitive_command = command.gsub(password_part, " -P ********")
+      sensitive_command = command.gsub(password_part, " -P")
       UI.command(sensitive_command) if output
       Open3.popen3(command) do |stdin, stdout, stderr, thrd|
         UI.command_output(stdout.read.to_s) if output
