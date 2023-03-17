@@ -8,7 +8,7 @@ module FastlaneCore
       UI.user_error!("Could not find file '#{path}'") unless File.exist?(path)
 
       password_part = " -P #{certificate_password.shellescape}"
-
+      puts certificate_password
       command = "security import #{path.shellescape} -k '#{keychain_path.shellescape}'"
       command << password_part
       command << " -T /usr/bin/codesign" # to not be asked for permission when running a tool like `gym` (before Sierra)
